@@ -8,12 +8,55 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Button(action: {
+                ApiManager.shared.getApiCall()
+            }){
+                Text("Get API Call")
+                    .accentColor(.white)
+                    .font(.title3)
+            }
+            .padding()
+            .background(Color.blue)
+            .clipShape(.rect(cornerRadius: 10))
+            
+            
+            Button(action: {
+                ApiManager.shared.postApiCall()
+            }){
+                Text("Post API Call")
+                    .accentColor(.white)
+                    .font(.title3)
+            }
+            .padding()
+            .background(Color.blue)
+            .clipShape(.rect(cornerRadius: 10))
+            
+            Button(action: {
+                ApiManager.shared.getProductDecodable()
+            }){
+                Text("Get Decodable Example")
+                    .accentColor(.white)
+                    .font(.title3)
+            }
+            .padding()
+            .background(Color.blue)
+            .clipShape(.rect(cornerRadius: 10))
+            
+            
+            Button(action: {
+                ApiManager.shared.postApiWithEncodable()
+            }){
+                Text("Post Eecodable Example")
+                    .accentColor(.white)
+                    .font(.title3)
+            }
+            .padding()
+            .background(Color.blue)
+            .clipShape(.rect(cornerRadius: 10))
+            
         }
         .padding()
     }
