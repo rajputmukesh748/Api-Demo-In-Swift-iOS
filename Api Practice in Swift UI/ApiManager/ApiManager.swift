@@ -126,4 +126,26 @@ class ApiManager {
             }.resume()
         }
     }
+    
+    
+    func escapingGetApiCall(){
+        if let url = URL(string: EndPoints.getApiUrl) {
+            GenericApiManager.shared.getApiCall(url: url, returnType: ProductModel.self) { data, error in
+                if let error = error {
+                    debugPrint(error)
+                    return
+                }
+                
+                if let data = data {
+                    debugPrint(data.title ?? "N/A")
+                }
+            }
+        }
+    }
+    
+    
+    func asyncAwaitApiCall() async throws -> ProductModel {
+        let response: ProductModel = try await GenericApiManager.shared.getAsyncApiCall(url: EndPoints.getApiUrl)
+        return response
+    }
 }

@@ -11,54 +11,58 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Button(action: {
+            CustomButton(title: "Get API Call") {
                 ApiManager.shared.getApiCall()
-            }){
-                Text("Get API Call")
-                    .accentColor(.white)
-                    .font(.title3)
             }
-            .padding()
-            .background(Color.blue)
-            .clipShape(.rect(cornerRadius: 10))
             
-            
-            Button(action: {
+            CustomButton(title: "Post API Call") {
                 ApiManager.shared.postApiCall()
-            }){
-                Text("Post API Call")
-                    .accentColor(.white)
-                    .font(.title3)
             }
-            .padding()
-            .background(Color.blue)
-            .clipShape(.rect(cornerRadius: 10))
             
-            Button(action: {
+            CustomButton(title: "Get Decodable Example") {
                 ApiManager.shared.getProductDecodable()
-            }){
-                Text("Get Decodable Example")
-                    .accentColor(.white)
-                    .font(.title3)
             }
-            .padding()
-            .background(Color.blue)
-            .clipShape(.rect(cornerRadius: 10))
             
-            
-            Button(action: {
+            CustomButton(title: "Post Eecodable Example") {
                 ApiManager.shared.postApiWithEncodable()
-            }){
-                Text("Post Eecodable Example")
-                    .accentColor(.white)
-                    .font(.title3)
             }
-            .padding()
-            .background(Color.blue)
-            .clipShape(.rect(cornerRadius: 10))
             
+            CustomButton(title: "Escapping API Call") {
+                ApiManager.shared.escapingGetApiCall()
+            }
+            
+            CustomButton(title: "Async Await Call") {
+                Task {
+                    do {
+                        let product = try await ApiManager.shared.asyncAwaitApiCall()
+                        print(product)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
         }
         .padding()
+    }
+}
+
+
+struct CustomButton: View {
+    
+    let title: String
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: action){
+            Text(title)
+                .accentColor(.white)
+                .font(.title3)
+        }
+        .padding()
+        .background(Color.blue)
+        .clipShape(.rect(cornerRadius: 10))
+        .frame(width: .infinity)
+        
     }
 }
 
